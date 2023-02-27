@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Guess the rank!</h1>
+<h4>Watch the play and decide which rank this game is</h4>
+<div id="player"></div>
+
+<div class="guesses">
+  <h4>Choose a rank:</h4>
+</div>
+ <h2>{{ video.ign }}</h2>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  function onYouTubeIframeAPIReady() {
+    var url = '{{video.url}}';
+    var videoId = url.split('v=')[1];
+    var player = new YT.Player('player', {
+      height: '360',
+      width: '640',
+      videoId: videoId,
+    });
+  }
+</script>
+ <form method="post">
+    {% csrf_token %}
+    <input type="radio" id="iron" name="guess" value="iron">
+    <label for="iron">Iron</label>
+    <input type="radio" id="bronze" name="guess" value="bronze">
+    <label for="bronze">Bronze</label>
+    <input type="radio" id="silver" name="guess" value="silver">
+    <label for="silver">Silver</label>
+     <input type="radio" id="gold" name="guess" value="gold">
+    <label for="gold">Gold</label>
+     <input type="radio" id="platinum" name="guess" value="platinum">
+    <label for="platinum">Platinum</label>
+     <input type="radio" id="diamond" name="guess" value="diamond">
+    <label for="diamond">Diamond</label>
+     <input type="radio" id="master" name="guess" value="master">
+    <label for="master">Master</label>
+     <input type="radio" id="grandmaster" name="guess" value="grandmaster">
+    <label for="grandmaster">Grandmaster</label>
+     <input type="radio" id="challenger" name="guess" value="challenger">
+    <label for="challenger">Challenger</label>
+     <hr>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
+
