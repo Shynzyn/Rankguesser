@@ -2,12 +2,10 @@
 {% block content %}
 <h1>Guess the rank!</h1>
 <h4>Watch the play and decide which rank this game is</h4>
-<div id="player"></div>
-
-<div class="guesses">
-  <h4>Choose a rank:</h4>
-</div>
  <h2>{{ video.ign }}</h2>
+<div class="yt-border" id="player"></div>
+
+
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
   function onYouTubeIframeAPIReady() {
@@ -20,29 +18,60 @@
     });
   }
 </script>
+  <h4>Choose a rank:</h4>
+<div style="padding: 20px">
  <form method="post">
+     <div class="rank">
     {% csrf_token %}
+     <label>
     <input type="radio" id="iron" name="guess" value="iron">
-    <label for="iron">Iron</label>
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png" alt="iron">
+     </label>
+
+     <label>
     <input type="radio" id="bronze" name="guess" value="bronze">
-    <label for="bronze">Bronze</label>
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png" alt="bronze">
+     </label>
+
+      <label>
     <input type="radio" id="silver" name="guess" value="silver">
-    <label for="silver">Silver</label>
-     <input type="radio" id="gold" name="guess" value="gold">
-    <label for="gold">Gold</label>
-     <input type="radio" id="platinum" name="guess" value="platinum">
-    <label for="platinum">Platinum</label>
-     <input type="radio" id="diamond" name="guess" value="diamond">
-    <label for="diamond">Diamond</label>
-     <input type="radio" id="master" name="guess" value="master">
-    <label for="master">Master</label>
-     <input type="radio" id="grandmaster" name="guess" value="grandmaster">
-    <label for="grandmaster">Grandmaster</label>
-     <input type="radio" id="challenger" name="guess" value="challenger">
-    <label for="challenger">Challenger</label>
-     <hr>
-    <button type="submit">Submit</button>
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/3.png" alt="silver">
+     </label>
+
+      <label>
+    <input type="radio" id="gold" name="guess" value="gold">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/4.png" alt="gold">
+     </label>
+
+      <label>
+    <input type="radio" id="platinum" name="guess" value="platinum">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/5.png" alt="platinum">
+     </label>
+
+      <label>
+    <input type="radio" id="diamond" name="guess" value="diamond">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/6.png" alt="diamond">
+     </label>
+
+      <label>
+    <input type="radio" id="master" name="guess" value="master">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/7.png" alt="master">
+     </label>
+
+      <label>
+    <input type="radio" id="grandmaster" name="guess" value="grandmaster">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png" alt="grandmaster">
+     </label>
+
+      <label>
+    <input type="radio" id="challenger" name="guess" value="challenger">
+     <img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png" alt="challenger">
+     </label>
+<br>
+         </div>
+    <button class="button" type="submit">Submit</button>
 </form>
+    </div>
 {% endblock %}
 
 

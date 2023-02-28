@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h1>Upload Video</h1>
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <br>
+    <input class="button" type="submit" value="Submit">
   </form>
 {% endblock %}
