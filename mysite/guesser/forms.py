@@ -4,21 +4,6 @@ import re
 
 
 class VideoUploadForm(forms.ModelForm):
-    url = forms.URLField(label='YouTube URL', max_length=200)
-    ign = forms.CharField(label='In-Game Name', max_length=50)
-    rank_choices = [
-        ('iron', 'Iron'),
-        ('bronze', 'Bronze'),
-        ('silver', 'Silver'),
-        ('gold', 'Gold'),
-        ('platinum', 'Platinum'),
-        ('diamond', 'Diamond'),
-        ('master', 'Master'),
-        ('grandmaster', 'Grandmaster'),
-        ('challenger', 'Challenger'),
-    ]
-    rank = forms.ChoiceField(choices=rank_choices)
-
     class Meta:
         model = Video
         fields = ['url', 'ign', 'rank']

@@ -8,6 +8,7 @@ from .models import Video, Guess
 
 import random
 
+
 def index(request):
     return HttpResponse("Hello World")
 
@@ -23,9 +24,12 @@ def upload_video(request):
     return render(request, 'upload_video.html', {'form': form})
 
 
+video = False
+
+
 def video_guess(request):
+    global video
     # Get a random video from the database
-    video = random.choice(Video.objects.all())
 
     # If the visitor has submitted a guess
     if request.method == 'POST':
@@ -46,4 +50,5 @@ def video_guess(request):
     # If the visitor hasn't submitted a guess yet
     else:
         # Render the template with the random video
+        video = random.choice(Video.objects.all())
         return render(request, 'video_guess.html', {'video': video})

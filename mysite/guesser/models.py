@@ -10,13 +10,18 @@ import re
 class Video(models.Model):
     ign = models.CharField(max_length=200, verbose_name="In-Game Name")
     url = models.URLField(validators=[URLValidator()])
-    rank = models.CharField(max_length=20)
-
-    def clean(self):
-        youtube_regex = r'^https:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}$'
-        youtube_url = self.url
-        if not re.match(youtube_regex, youtube_url):
-            raise ValidationError('Invalid YouTube URL')
+    rank_choices = [
+        ('iron', 'Iron'),
+        ('bronze', 'Bronze'),
+        ('silver', 'Silver'),
+        ('gold', 'Gold'),
+        ('platinum', 'Platinum'),
+        ('diamond', 'Diamond'),
+        ('master', 'Master'),
+        ('grandmaster', 'Grandmaster'),
+        ('challenger', 'Challenger'),
+    ]
+    rank = models.CharField(max_length=30, choices=rank_choices)
 
     def __str__(self):
         return f"{self.rank} - {self.ign}"
@@ -24,6 +29,13 @@ class Video(models.Model):
     class Meta:
         verbose_name = 'Video'
         verbose_name_plural = 'Videos'
+
+
+def clean(self):
+    youtube_regex = r'^https:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}$'
+    youtube_url = self.url
+    if not re.match(youtube_regex, youtube_url):
+        raise ValidationError('Invalid YouTube URL')
 
 
 class Guess(models.Model):
