@@ -10,9 +10,7 @@ import random
 
 
 def index(request):
-    return HttpResponse("Hello World")
-
-
+    return render(request, 'index.html')
 def upload_video(request):
     if request.method == 'POST':
         form = VideoUploadForm(request.POST)

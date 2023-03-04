@@ -5,3 +5,7 @@ urlpatterns = [
     path('', include('guesser.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
