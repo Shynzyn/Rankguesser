@@ -3,6 +3,11 @@
 {% block content %}
 <h1>Result</h1>
 <p>You guessed {{ guess }}.</p>
+{% if guess == 'iron' %}
+<img src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png" alt="iron">
+{% elif guess == 'bronze' %}
+<img class="resize" src="https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png" alt="bronze">
+{% endif %}
 {% if is_correct %}
     <p>Congratulations, you got it right!</p>
 {% else %}
@@ -10,5 +15,4 @@
 {% endif %}
 <p>The correct rank was {{ video.rank }}.</p>
 <a href="{% url 'guess' %}"><p><button class="button" type="button">Play again</button></p></a>
-
 {% endblock %}

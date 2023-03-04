@@ -32,31 +32,43 @@ video = False
 
 
 def video_guess(request):
-    global video
     # Get a random video from the database
+    RANKS_DICT = {
+        'iron': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png',
+        'bronze': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png',
+        'silver': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/3.png',
+        'gold': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/4.png',
+        'platinum': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/5.png',
+        'diamond': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/6.png',
+        'master': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/7.png',
+        'grandmaster': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
+        'challenger': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
+    }
 
     # If the visitor has submitted a guess
     if request.method == 'POST':
-        guess = request.POST['guess']
-        is_correct = (guess == video.rank)
+        guess = request.POST.get('guess')
+        if guess is not None:
+            video = Video.objects.order_by('?').first()
+            is_correct = (guess == video.rank)
 
-        # Create a new Guess object and save it to the database
-        guess_obj = Guess(video=video, guess=guess, is_correct=is_correct)
-        guess_obj.save()
+            # Create a new Guess object and save it to the database
+            guess_obj = Guess(video=video, guess=guess, is_correct=is_correct)
+            guess_obj.save()
 
-        # Render a response that shows the result of the guess
-        return render(request, 'video_guess_result.html', {
-            'video': video,
-            'guess': guess,
-            'is_correct': is_correct,
-        })
+            # Render a response that shows the result of the guess
+            return render(request, 'video_guess_result.html', {
+                'video': video,
+                'guess': guess,
+                'is_correct': is_correct,
+                'ranks': RANKS_DICT,
+            })
 
     # If the visitor hasn't submitted a guess yet
     else:
-        # Render the template with the random video
-        video = random.choice(Video.objects.all())
+        # Render the template with a random video
+        video = Video.objects.order_by('?').first()
         return render(request, 'video_guess.html', {'video': video})
-
 
 @csrf_protect
 def register(request):
