@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<h1>Sign in!</h1>
   {% if form.errors %}
     <p>Prisijungimo klaida, bandykite dar kartą!</p>
   {% endif %}
@@ -11,23 +11,27 @@
       <p>Neturite prieigos prie šios informacijos. Turite prisijungti.</p>
     {% endif %}
   {% endif %}
-
+<div class="row justify-content-center mt-5">
+  <div class="col-auto">
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <table>
+    <table class="table-responsive">
       <tr>
-        <td>Vartotojas: </td>
+        <td>Username: </td>
         <td>{{ form.username }}</td>
       </tr>
       <tr>
-        <td>Slaptažodis: </td>
+        <td>Password: </td>
         <td>{{ form.password }}</td>
       </tr>
     </table>
-    <input type="submit" value="Prisijungti" />
+
+    <input type="submit" class="button" style="margin-top:50px;" value="Let me in!" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
-
-  <p><a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a></p>
+</div>
+</div>
+<br>
+  <p><a href="{% url 'password_reset' %}" class="link-url">Forgot password?</a></p>
 
 {% endblock %}

@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+
 from .models import Video
 import re
 
@@ -18,3 +20,11 @@ class VideoUploadForm(forms.ModelForm):
 def is_valid_youtube_url(url):
     regex = r'^https:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}$'
     return bool(re.match(regex, url))
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']

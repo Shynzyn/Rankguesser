@@ -1,9 +1,20 @@
+
 body {
     background-color: #333333;
     color: #fff;
     font-family: brush script mt, cursive;
     font-size: 20px;
 }
+
+.link-url {
+     font-family:arial;
+     color: #00837e;
+}
+.link-url:hover {
+     color: #43A6C6;
+
+
+ }
 
 .container {
     max-width: 900px;
@@ -116,4 +127,6 @@ form > button {
     font-size: 12px;
 }
 }
+
+
 

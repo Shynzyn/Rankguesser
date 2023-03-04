@@ -9,6 +9,6 @@
 <h4 style="margin-top:80px">Please sign in to play the game!</h4>
 <a href="{% url 'login' %}"><button style="margin-top: 10px" class="button">Login</button></a>
 <h4 style="margin-top:20px">Or</h4>
-<a href="#"><button class="button">Register</button></a>
+<a href="{% url 'register' %}"><button class="button">Register</button></a>
 {% endif %}
 {% endblock %}
