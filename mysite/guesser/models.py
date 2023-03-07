@@ -1,9 +1,7 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 import re
 
 
@@ -42,7 +40,13 @@ class Guess(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     guess = models.CharField(max_length=20)
     is_correct = models.BooleanField()
+    date_guessed = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
+        unique_together = ('user', 'video')
         verbose_name = 'Guess'
         verbose_name_plural = 'Guesses'
+
+    def __str__(self):
+        return f"{self.user}, video: {self.video}, guess: {self.guess}, date: {self.date_guessed}"

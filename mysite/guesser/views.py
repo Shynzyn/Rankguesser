@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -17,6 +19,10 @@ def index(request):
     return render(request, 'index.html')
 
 
+def already_guessed(request):
+    return render(request, 'you_already_guessed.html')
+
+
 def upload_video(request):
     if request.method == 'POST':
         form = VideoUploadForm(request.POST)
@@ -31,9 +37,11 @@ def upload_video(request):
 video = False
 
 
+@login_required
 def video_guess(request):
-    # Get a random video from the database
-    RANKS_DICT = {
+    global video
+
+    ranks_dict = {
         'iron': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png',
         'bronze': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png',
         'silver': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/3.png',
@@ -44,31 +52,32 @@ def video_guess(request):
         'grandmaster': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
         'challenger': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
     }
-
     # If the visitor has submitted a guess
     if request.method == 'POST':
         guess = request.POST.get('guess')
-        if guess is not None:
-            video = Video.objects.order_by('?').first()
-            is_correct = (guess == video.rank)
+        is_correct = guess == video.rank
+        user = request.user
 
-            # Create a new Guess object and save it to the database
-            guess_obj = Guess(video=video, guess=guess, is_correct=is_correct)
-            guess_obj.save()
+        # Check if the user has already guessed for this video
+        if Guess.objects.filter(user=user, video=video).exists():
+            messages.error(request, 'You have already guessed for this video.')
+            return redirect('already_guessed')
 
-            # Render a response that shows the result of the guess
-            return render(request, 'video_guess_result.html', {
-                'video': video,
-                'guess': guess,
-                'is_correct': is_correct,
-                'ranks': RANKS_DICT,
-            })
-
-    # If the visitor hasn't submitted a guess yet
+        # Create a new Guess object and save it to the database
+        guess_obj = Guess(video=video, guess=guess, is_correct=is_correct, user=user)
+        guess_obj.save()
+        # Render a response that shows the result of the guess
+        return render(request, 'video_guess_result.html', {
+            'video': video,
+            'guess': guess,
+            'is_correct': is_correct,
+            'rank_link': ranks_dict[video.rank],
+            'guess_link': ranks_dict[guess],
+        })
     else:
-        # Render the template with a random video
-        video = Video.objects.order_by('?').first()
+        video = random.choice(Video.objects.all())
         return render(request, 'video_guess.html', {'video': video})
+
 
 @csrf_protect
 def register(request):
