@@ -8,6 +8,7 @@ import re
 class Video(models.Model):
     ign = models.CharField(max_length=200, verbose_name="In-Game Name")
     url = models.URLField(validators=[URLValidator()])
+    champion = models.CharField(max_length=30, verbose_name="Champion", null=True)
     rank_choices = [
         ('iron', 'Iron'),
         ('bronze', 'Bronze'),
@@ -20,6 +21,7 @@ class Video(models.Model):
         ('challenger', 'Challenger'),
     ]
     rank = models.CharField(max_length=30, choices=rank_choices)
+
 
     def __str__(self):
         return f"{self.rank} - {self.ign}"

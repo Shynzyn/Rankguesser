@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="center">
 {% if is_correct %}
-    <h3>Congratulations, you got it right!</h3>
+    <h1>Congratulations, you got it right!</h1>
 {% else %}
-    <h3>Sorry, that's not the correct rank.</h3>
+    <h1>Sorry, that's not the correct rank.</h1>
 {% endif %}
 
 <table class="center">
@@ -17,12 +18,20 @@
      </thead>
 <tbody>
 <tr>
-    <td><p>{{ guess }}</p>  <img class="resize-plus" src="{{ guess_link }}" alt="iron"></td>
-    <td><p>{{ video.rank }}</p> <img class="resize-plus" src="{{ rank_link }}" alt="{{ video.rank }}"></td>
+    <td><img class="resize-plus" src="{{ guess_link }}" alt="iron"></td>
+    <td><img class="resize-plus" src="{{ rank_link }}" alt="{{ video.rank }}"></td>
 </tr>
 </tbody>
     </table>
+    {% for rank, count in rank_count.items %}
+    <p>{{ rank }} - {{ count }}/{{ total_guesses }}</p>
 
+{% endfor %}
+    <br>
 <a href="{% url 'guess' %}"><p><button class="button" type="button">Play again</button></p></a>
+
 </div>
+
+
+
 {% endblock %}

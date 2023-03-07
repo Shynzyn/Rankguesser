@@ -1,15 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db import IntegrityError
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import gettext as _
 from django.contrib import messages
 from .forms import VideoUploadForm
-
-from django.utils import timezone
 from .models import Video, Guess
 
 import random
@@ -56,11 +51,10 @@ def video_guess(request):
         'grandmaster': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
         'challenger': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
     }
+
     user = request.user
     guessed_videos = Guess.objects.filter(user=user).values_list('video__id', flat=True)
-    # Exclude already guessed videos from the random selection
     videos = Video.objects.exclude(id__in=guessed_videos)
-    # If there are no unguessed videos, show an error message
     if not videos.exists():
         messages.error(request, 'You have already guessed all the videos.')
         return redirect('no_videos_left')
@@ -70,25 +64,34 @@ def video_guess(request):
         guess = request.POST.get('guess')
         is_correct = guess == video.rank
 
-        # Check if the user has already guessed for this video
         if Guess.objects.filter(user=user, video=video).exists():
             messages.error(request, 'You have already guessed for this video.')
             return redirect('already_guessed')
 
-        # Create a new Guess object and save it to the database
         guess_obj = Guess(video=video, guess=guess, is_correct=is_correct, user=user)
         guess_obj.save()
-        # Render a response that shows the result of the guess
+        guess_count = Guess.objects.filter(video=video, guess=guess).count()
+        total_guesses = Guess.objects.filter(video=video).count()
+        rank_count = {}
+
+        for rank in ranks_dict:
+            count = Guess.objects.filter(video=video, guess=rank).count()
+            rank_count[rank] = count
+
         return render(request, 'video_guess_result.html', {
             'video': video,
             'guess': guess,
             'is_correct': is_correct,
             'rank_link': ranks_dict[video.rank],
             'guess_link': ranks_dict[guess],
+            'guess_count': guess_count,
+            'total_guesses': total_guesses,
+            'rank_count': rank_count,
         })
     else:
         video = random.choice(videos)
-        return render(request, 'video_guess.html', {'video': video})
+
+    return render(request, 'video_guess.html', {'video': video})
 
 
 @csrf_protect

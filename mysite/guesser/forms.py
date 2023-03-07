@@ -8,7 +8,7 @@ import re
 class VideoUploadForm(forms.ModelForm):
     class Meta:
         model = Video
-        fields = ['url', 'ign', 'rank']
+        fields = ['url', 'ign', 'champion', 'rank']
 
     def clean_youtube_url(self):
         youtube_url = self.cleaned_data['youtube_url']

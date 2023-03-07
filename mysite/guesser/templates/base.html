@@ -28,7 +28,7 @@
               </svg>
             {{ user.get_username }}</a></li>
             <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Placeholder</a></li>
+            <li class="nav-item"><a class="nav-link" style="color: red;" href="{% url 'upload' %}">Upload a clip!</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}?next=/accounts/logout">Log out</a></li>
           {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>

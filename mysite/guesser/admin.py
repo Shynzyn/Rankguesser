@@ -3,11 +3,17 @@ from .models import Video, Guess
 
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('ign', 'rank', 'url')
-    list_filter = ('rank', 'ign')
-    search_fields = ('ign', 'rank')
+    list_display = ('ign', 'champion', 'rank', 'url', )
+    list_filter = ('rank', 'ign', 'champion')
+    search_fields = ('ign', 'rank', 'champion')
+
+
+class GuessAdmin(admin.ModelAdmin):
+    list_display = ('user', 'video', 'guess', 'date_guessed')
+    list_filter = ('date_guessed', 'user', 'video', 'guess')
+    search_fields = ('date_guessed', 'user', 'video', 'guess')
 
 
 # Register your models here.
 admin.site.register(Video, VideoAdmin)
-admin.site.register(Guess)
+admin.site.register(Guess, GuessAdmin)
