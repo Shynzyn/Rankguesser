@@ -23,6 +23,10 @@ def already_guessed(request):
     return render(request, 'you_already_guessed.html')
 
 
+def no_videos_left(request):
+    return render(request, 'no_videos_left.html')
+
+
 def upload_video(request):
     if request.method == 'POST':
         form = VideoUploadForm(request.POST)
@@ -52,11 +56,19 @@ def video_guess(request):
         'grandmaster': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
         'challenger': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
     }
+    user = request.user
+    guessed_videos = Guess.objects.filter(user=user).values_list('video__id', flat=True)
+    # Exclude already guessed videos from the random selection
+    videos = Video.objects.exclude(id__in=guessed_videos)
+    # If there are no unguessed videos, show an error message
+    if not videos.exists():
+        messages.error(request, 'You have already guessed all the videos.')
+        return redirect('no_videos_left')
+
     # If the visitor has submitted a guess
     if request.method == 'POST':
         guess = request.POST.get('guess')
         is_correct = guess == video.rank
-        user = request.user
 
         # Check if the user has already guessed for this video
         if Guess.objects.filter(user=user, video=video).exists():
@@ -75,7 +87,7 @@ def video_guess(request):
             'guess_link': ranks_dict[guess],
         })
     else:
-        video = random.choice(Video.objects.all())
+        video = random.choice(videos)
         return render(request, 'video_guess.html', {'video': video})
 
 

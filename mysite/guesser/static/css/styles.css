@@ -5,6 +5,10 @@ body {
     font-family: brush script mt, cursive;
     font-size: 20px;
 }
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .link-url {
      font-family:arial;
@@ -27,6 +31,11 @@ body {
 h1 {
     font-size: 72px;
     margin-bottom: 30px;
+}
+.resize-plus {
+    width: 200px;
+    height: auto;
+    padding: 20px;
 }
 
 .resize {
@@ -86,6 +95,10 @@ form > button {
     height: 240px;
     width: 426px;
   }
+  .resize-plus {
+    width: 150px;
+    height: auto;
+    padding: 10px;
 
   /* Reduce the size of the radio button images */
  .resize {
@@ -93,17 +106,17 @@ form > button {
     height: auto;
     transition: transform 0.5s ease-in-out;
     padding: 1px;
-}
+ }
  input:checked + img {
   transform: scale(1.5);
-}
+ }
 
-    .button {
+ .button {
     position: relative;
     text-align: center;
-    width: 250px;
+    width: 200px;
     padding: 10px;
-    font-size: 12px;
+    font-size: 10px;
     color: #8c9ea3;
     font-family: brush script mt, cursive;
     font-color: white;
@@ -115,17 +128,17 @@ form > button {
     border-radius: 100px;
     transition: 0.5s;
     background-color: #212121;
-    }
-    h1 {
+ }
+ h1 {
     font-size: 36px;
-    }
+ }
 
-    body {
+ body {
     background-color: #333333;
     color: #fff;
     font-family: brush script mt, cursive;
     font-size: 12px;
-}
+ }
 }
 
 

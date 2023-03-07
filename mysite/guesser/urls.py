@@ -7,5 +7,6 @@ urlpatterns = [
     path('upload/', views.upload_video, name='upload'),
     path('guess/', views.video_guess, name='guess'),
     path('register', views.register, name='register'),
-    path('already_guessed', views.already_guessed, name='already_guessed')
+    path('already_guessed', views.already_guessed, name='already_guessed'),
+    path('no_videos_left', views.no_videos_left, name='no_videos_left'),
 ]

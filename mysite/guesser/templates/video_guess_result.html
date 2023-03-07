@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Result</h1>
-<p>You guessed {{ guess }}.</p>
-
-<img src="{{ guess_link }}" alt="iron">
-
+<div class="center">
 {% if is_correct %}
-    <p>Congratulations, you got it right!</p>
+    <h3>Congratulations, you got it right!</h3>
 {% else %}
-    <p>Sorry, that's not the correct rank.</p>
+    <h3>Sorry, that's not the correct rank.</h3>
 {% endif %}
-<p>The correct rank was {{ video.rank }}.</p>
-<img src="{{ rank_link }}" alt="{{ video.rank }}">
-<a href="{% url 'guess' %}"><p><button class="button" type="button">Play again</button></p></a>
 
+<table class="center">
+    <thead>
+    <tr>
+<th>Your Guess</th>
+        <th>Actuall Rank</th>
+    </tr>
+     </thead>
+<tbody>
+<tr>
+    <td><p>{{ guess }}</p>  <img class="resize-plus" src="{{ guess_link }}" alt="iron"></td>
+    <td><p>{{ video.rank }}</p> <img class="resize-plus" src="{{ rank_link }}" alt="{{ video.rank }}"></td>
+</tr>
+</tbody>
+    </table>
+
+<a href="{% url 'guess' %}"><p><button class="button" type="button">Play again</button></p></a>
+</div>
 {% endblock %}
