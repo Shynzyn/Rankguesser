@@ -41,15 +41,42 @@ def video_guess(request):
     global video
 
     ranks_dict = {
-        'iron': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png',
-        'bronze': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png',
-        'silver': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/3.png',
-        'gold': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/4.png',
-        'platinum': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/5.png',
-        'diamond': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/6.png',
-        'master': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/7.png',
-        'grandmaster': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
-        'challenger': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
+        'iron': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/1.png',
+            'color': '#7b6c6a',
+        },
+        'bronze': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/2.png',
+            'color': '#9e7061',
+        },
+        'silver': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/3.png',
+            'color': '#84929d',
+        },
+        'gold': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/4.png',
+            'color': '#c5965c',
+        },
+        'platinum': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/5.png',
+            'color': '#41977e',
+        },
+        'diamond': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/6.png',
+            'color': '#365ab8',
+        },
+        'master': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/7.png',
+            'color': '#d36efb',
+        },
+        'grandmaster': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/8.png',
+            'color': '#d25629',
+        },
+        'challenger': {
+            'url': 'https://lolg-cdn.porofessor.gg/img/s/league-icons-v3/160/9.png',
+            'color': '#5dabb5',
+        },
     }
 
     user = request.user
@@ -74,9 +101,15 @@ def video_guess(request):
         total_guesses = Guess.objects.filter(video=video).count()
         rank_count = {}
 
-        for rank in ranks_dict:
+        for rank in ranks_dict.keys():
             count = Guess.objects.filter(video=video, guess=rank).count()
-            rank_count[rank] = count
+            if count > 0:
+                percentage = round(count / total_guesses * 100, 1)
+                rank_count[rank] = {
+                    'percentage': percentage,
+                    'url': ranks_dict[rank]['url'],
+                    'color': ranks_dict[rank]['color']
+                }
 
         return render(request, 'video_guess_result.html', {
             'video': video,

@@ -22,7 +22,6 @@ class Video(models.Model):
     ]
     rank = models.CharField(max_length=30, choices=rank_choices)
 
-
     def __str__(self):
         return f"{self.rank} - {self.ign}"
 

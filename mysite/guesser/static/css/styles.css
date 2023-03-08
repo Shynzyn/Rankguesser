@@ -16,9 +16,10 @@ body {
 }
 .link-url:hover {
      color: #43A6C6;
-
-
  }
+.blue {
+    background-color: blue;
+}
 
 .container {
     max-width: 900px;
@@ -89,6 +90,8 @@ form > button {
                   0 0 3px #00837e;
 }
 
+
+
 @media (max-width: 768px) {
   /* Reduce the size of the YouTube player */
   #player {
@@ -99,19 +102,21 @@ form > button {
     width: 150px;
     height: auto;
     padding: 10px;
+  }
 
   /* Reduce the size of the radio button images */
- .resize {
+  .resize {
     width: 40px;
     height: auto;
     transition: transform 0.5s ease-in-out;
     padding: 1px;
- }
- input:checked + img {
-  transform: scale(1.5);
- }
+  }
 
- .button {
+  input:checked + img {
+    transform: scale(1.5);
+  }
+
+  .button {
     position: relative;
     text-align: center;
     width: 200px;
@@ -128,18 +133,17 @@ form > button {
     border-radius: 100px;
     transition: 0.5s;
     background-color: #212121;
- }
- h1 {
-    font-size: 36px;
- }
+  }
 
- body {
+  h1 {
+    font-size: 36px;
+  }
+
+  body {
     background-color: #333333;
     color: #fff;
     font-family: brush script mt, cursive;
-    font-size: 12px;
- }
+    font-size: 20px;
+  }
 }
-
-
 
