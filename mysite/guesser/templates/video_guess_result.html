@@ -26,14 +26,29 @@
     <p>How other players guessed:</p>
 
 
+
 <div style="height: 200px; display: flex; align-items: flex-end; justify-content: center;">
   {% for rank, data in rank_count.items %}
-    <div style="min-height:20px; height: {{ data.percentage }}%; width: 50px; margin-left: 10px; background-color: {{ data.color }}; position: relative; border-radius: 5px;">
+<style>
+  .grow-animation {
+    animation: grow 1.5s ease-in-out;
+  }
+  @keyframes grow {
+    0% {
+      height: 0;
+    }
+    {{ data.percentage }}% {
+      height: 0%;
+    }
+  }
+</style>
+    <div class="bar-graph grow-animation" style="min-height:20px; height: {{ data.percentage }}%; width: 50px; margin-left: 10px; background-color: {{ data.color }}; position: relative; border-radius: 5px;">
       <div style="display: flex; justify-content: center; font-size: 14px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">{{ data.percentage }}%</div>
       <img src="{{ data.url }}" alt="{{ rank }}" style="width: 65px; position: absolute; top: -45px; left: 50%; transform: translateX(-50%);">
     </div>
   {% endfor %}
 </div>
+
 
 
 

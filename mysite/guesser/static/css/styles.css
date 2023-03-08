@@ -17,9 +17,7 @@ body {
 .link-url:hover {
      color: #43A6C6;
  }
-.blue {
-    background-color: blue;
-}
+
 
 .container {
     max-width: 900px;
