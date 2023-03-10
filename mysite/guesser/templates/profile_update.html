@@ -17,8 +17,19 @@
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
+        <div style="max-width: 350px; margin: 0 auto; text-align: center;">
+       <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <br>
+                <button class="button" type="submit">Update</button>
             </div>
-<a href="{% url 'profile_update' %}"><button class="button">Update Profile</button></a>
-
-
+        </form>
+            </div>
+    </div>
 {% endblock content %}
