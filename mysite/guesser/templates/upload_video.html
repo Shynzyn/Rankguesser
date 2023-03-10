@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>Upload Video</h1>
+<img style="width: 270px; height: auto;" src="/media/logo.png">
+  <h2>Upload Video</h2>
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}

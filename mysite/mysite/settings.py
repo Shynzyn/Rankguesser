@@ -132,3 +132,5 @@ EMAIL_HOST_USER = 'mano_pastas@gmail.com'
 # el. pašto adresas iš kurio siųsite
 EMAIL_HOST_PASSWORD = 'VerySecret'
 # slaptažodis
+
+LOGOUT_REDIRECT_URL = 'index'

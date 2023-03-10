@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
@@ -58,6 +57,10 @@ class Guess(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(default="default.png", upload_to="profile_pics")
+    exp_points = models.IntegerField(default=0)
+    experience_needed = models.IntegerField(default=100)
+    level = models.IntegerField(default=1)
+    rank = models.CharField(max_length=20, default='Iron')
 
     def __str__(self):
         return f"{self.user.username} profile"
@@ -69,3 +72,25 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.profile_pic.path)
+
+    def update_rank(self):
+        if self.level < 2:
+            self.rank = 'Iron'
+        elif self.level < 4:
+            self.rank = 'Bronze'
+        elif self.level < 6:
+            self.rank = 'Silver'
+        elif self.level < 8:
+            self.rank = 'Gold'
+        elif self.level < 10:
+            self.rank = 'Platinum'
+        elif self.level < 12:
+            self.rank = 'Diamond'
+        elif self.level < 14:
+            self.rank = 'Master'
+        elif self.level < 15:
+            self.rank = 'Grandmaster'
+        else:
+            self.rank = 'Challenger'
+        self.save()
+

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Guess the rank!</h1>
-<h4>Watch the clip and decide which rank this game is!</h4>
- <h2>{{ video.ign }} ({{video.champion}})</h2>
+<h2>Guess the rank!</h2>
+<p>Watch the clip and decide which rank this game is!</p>
+ <h4>{{ video.ign }} ({{video.champion}})</h4>
 <div class="yt-border" id="player"></div>
 
 
@@ -19,7 +19,7 @@
   }
 </script>
   <h4>Choose a rank:</h4>
-<div style="padding: 20px">
+<div style="padding-top: 10px">
  <form method="post">
      <div class="rank">
     {% csrf_token %}
@@ -69,7 +69,7 @@
      </label>
 <br>
          </div>
-    <button class="button" type="submit">Submit</button>
+    <button class="button" type="submit">Guess</button>
 </form>
     </div>
 {% endblock %}

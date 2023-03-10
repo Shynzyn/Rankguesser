@@ -11,4 +11,5 @@ urlpatterns = [
     path('no_videos_left', views.no_videos_left, name='no_videos_left'),
     path('profile_update', views.profile_update, name='profile_update'),
     path('profile', views.profile, name='profile'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
 ]

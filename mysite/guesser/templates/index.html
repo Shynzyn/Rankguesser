@@ -1,14 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Play Game{% endblock %}
 {% block content %}
-<h1>Welcome to League of Legends rank guessing game!</h1>
-
+<h2>Welcome to League of Legends rank guessing game!</h2>
+<img style="width: 270px; height: auto;" src="media/logo.png">
+<div style="max-width: 500px; margin: 0 auto; text-align: center;">
+<p>Can you guess the rank of the player in the provided clip? Test your knowledge of the game and climb the ranks!</p>
+    </div>
 {% if user.is_authenticated %}
-<a href="{% url 'guess' %}"><button style="margin-top: 80px" class="button">Start Game</button></a>
+<a href="{% url 'guess' %}"><button style="margin-top: 10px" class="button">Start Game</button></a>
+<br>
+<a href="{% url 'profile' %}" ><button style="margin-top: 10px" class="button">My Profile</button></a>
 {% else %}
-<h4 style="margin-top:80px">Please sign in to play the game!</h4>
+<p style="margin-top: 10px; font-size: 16px; color: #cb7a3c;" >Please sign in to play the game!</p>
 <a href="{% url 'login' %}"><button style="margin-top: 10px" class="button">Login</button></a>
-<h4 style="margin-top:20px">Or</h4>
-<a href="{% url 'register' %}"><button class="button">Register</button></a>
+<br>
+<a href="{% url 'register' %}"><button style="margin-top: 10px" class="button">Register</button></a>
 {% endif %}
+<br>
+<a href="{% url 'leaderboard' %}" ><button style="margin-top: 10px" class="button">Leaderboard</button></a>
 {% endblock %}

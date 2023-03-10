@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Update Profile{% endblock %}
+{% block title %}My Profile{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
@@ -11,14 +11,60 @@
         {% endfor %}
         {% endif %}
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.profile_pic.url }}">
+        <img style="height: 150px; border-radius: 15%;" src="{{ user.profile.profile_pic.url }}">
         <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
+          <h3 class="account-heading">{{ user.username }}</h3>
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
             </div>
-<a href="{% url 'profile_update' %}"><button class="button">Update Profile</button></a>
+<h4>Rank: {{ profile.rank }}</h4>
+<h4>Level: {{ profile.level }}</h4>
+<h4>Experience:</h4>
+<style>
+    .progress {
+    position: relative;
+    width: 280px;
+    height: 25px;
+    border: solid 2px;
+    border-color: #292929;
+    background: #474747;
+    border-radius: 10px;
+    overflow: hidden;
+    }
+    .progress__fill {
+    height: 100%;
+    background: #4f1f72;
+    transition: background 0.5s ease-in-out;
+    }
+    .progress__fill:hover {
+    background: #61288c;
+    }
+    .progress__text {
+      position: absolute;
+      font: bold 14px brush script mt, cursive;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
+</style>
+<div style="max-width: 280px; margin: 0 auto; text-align: center;">
+<div class="progress">
+    <div class="progress__fill" style="width:{{ progress }}%">
+        <div class="progress__text">
+            {{ profile.exp_points }} / {{profile.experience_needed }}
+        </div>
+    </div>
+</div>
+    </div>
+
+
+<a href="{% url 'profile_update' %}"><button class="button" style="margin-top: 40px">Update Profile</button></a>
+<br>
+<a href="{% url 'guess' %}"><button class="button" style="margin-top: 10px">Play the game!</button></a>
+<br>
+<a href="{% url 'leaderboard' %}"><button class="button" style="margin-top: 10px">Leaderboard</button></a>
 
 {% endblock content %}

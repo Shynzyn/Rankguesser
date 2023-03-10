@@ -15,7 +15,7 @@ body {
      color: #00837e;
 }
 .link-url:hover {
-     color: #43A6C6;
+     color: #cb7a3c;
  }
 
 
@@ -23,12 +23,18 @@ body {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 
 }
 
 h1 {
-    font-size: 72px;
+    font-size: 52px;
+    margin-bottom: 30px;
+
+}
+
+h2 {
+    font-size: 52px;
     margin-bottom: 30px;
 }
 .resize-plus {
@@ -47,8 +53,9 @@ h1 {
 .yt-border {
     border: solid 3px;
     border-color: #00837e;
-
 }
+
+
 
 div.rank input {
     display: none;
@@ -61,6 +68,8 @@ input:checked + img {
 form > button {
     margin-top: 20px;
 }
+
+
 
 .button {
     position: relative;
@@ -82,10 +91,11 @@ form > button {
 }
 
 .button:hover {
-    box-shadow: 0 1px 5px 0 #00837e inset, 0 3px 15px 0 #00837e,
-                0 1px 5px 0 #00837e inset, 0 3px 15px 0 #00837e;
-    text-shadow: 0 0 3px #00837e,
-                  0 0 3px #00837e;
+    border: 2px solid #cb7a3c;
+    box-shadow: 0 1px 5px 0 #cb7a3c inset, 0 3px 15px 0 #cb7a3c,
+                0 1px 5px 0 #cb7a3c inset, 0 3px 15px 0 #cb7a3c;
+    text-shadow: 0 0 3px #cb7a3c,
+                  0 0 3px #cb7a3c;
 }
 
 
@@ -136,6 +146,13 @@ form > button {
   h1 {
     font-size: 36px;
   }
+    h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    }
+    h4 {
+    font-size: 14px;
+    }
 
   body {
     background-color: #333333;

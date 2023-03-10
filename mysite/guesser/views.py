@@ -1,17 +1,24 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import gettext as _
 from django.contrib import messages
 from .forms import VideoUploadForm, UserUpdateForm, ProfileUpdateForm
-from .models import Video, Guess
-
+from .models import Video, Guess, Profile
+from django.views.generic import ListView
 import random
 
 
 def index(request):
     return render(request, 'index.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
 
 
 def already_guessed(request):
@@ -82,6 +89,7 @@ def video_guess(request):
     user = request.user
     guessed_videos = Guess.objects.filter(user=user).values_list('video__id', flat=True)
     videos = Video.objects.exclude(id__in=guessed_videos)
+
     if not videos.exists():
         messages.error(request, 'You have already guessed all the videos.')
         return redirect('no_videos_left')
@@ -97,6 +105,17 @@ def video_guess(request):
 
         guess_obj = Guess(video=video, guess=guess, is_correct=is_correct, user=user)
         guess_obj.save()
+        profile = Profile.objects.get(user=request.user)
+        if is_correct:
+            profile.exp_points += 80
+            profile.save()
+            if profile.exp_points >= profile.experience_needed:
+                profile.level += 1
+                profile.exp_points = profile.exp_points - profile.experience_needed
+                profile.experience_needed = profile.experience_needed * 1.1
+                profile.save()
+                profile.update_rank()
+
         guess_count = Guess.objects.filter(video=video, guess=guess).count()
         total_guesses = Guess.objects.filter(video=video).count()
         rank_count = {}
@@ -179,7 +198,20 @@ def profile_update(request):
 
 
 def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    progress = profile.exp_points / profile.experience_needed * 100
     context = {
-
+        'progress': progress,
+        'profile': profile,
     }
     return render(request, 'profile.html', context)
+
+
+def leaderboard(request):
+    profiles = Profile.objects.order_by('-level', '-exp_points')
+    paginator = Paginator(profiles, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'leaderboard.html', {'page_obj': page_obj})
