@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'guesser',
+    'guesser.apps.GuesserConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',

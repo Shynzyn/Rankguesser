@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Video, Guess
+from .models import Video, Guess, Profile
 
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('ign', 'champion', 'rank', 'url', )
+    list_display = ('ign', 'champion', 'rank', 'url',)
     list_filter = ('rank', 'ign', 'champion')
     search_fields = ('ign', 'rank', 'champion')
 
@@ -17,3 +17,4 @@ class GuessAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Guess, GuessAdmin)
+admin.site.register(Profile)

@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from PIL import Image
 import re
 
 
@@ -51,3 +53,19 @@ class Guess(models.Model):
 
     def __str__(self):
         return f"{self.user}, video: {self.video}, guess: {self.guess}, date: {self.date_guessed}"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(default="default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profile"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.profile_pic.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.profile_pic.path)

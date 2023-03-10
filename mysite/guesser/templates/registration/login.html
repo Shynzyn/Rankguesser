@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% block title %}Sign In{% endblock %}
 {% block content %}
 <h1>Sign in!</h1>
   {% if form.errors %}
@@ -29,9 +29,10 @@
     <input type="submit" class="button" style="margin-top:50px;" value="Let me in!" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
+    <span style="font-size: 14px;">
+  <a href="{% url 'password_reset' %}" class="link-url">Forgot password?</a>&nbsp;&nbsp;&nbsp;<a href="{% url 'register' %}" class="link-url">Don't have an account?</a>
+    </span>
 </div>
 </div>
-<br>
-  <p><a href="{% url 'password_reset' %}" class="link-url">Forgot password?</a></p>
 
 {% endblock %}
