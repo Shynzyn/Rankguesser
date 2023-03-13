@@ -125,9 +125,11 @@ form > button {
   }
 
   .button {
+    -webkit-appearance: none;
+    appearance: none;
     position: relative;
     text-align: center;
-    width: 200px;
+    width: 150px;
     padding: 10px;
     font-size: 10px;
     color: #8c9ea3;
@@ -155,10 +157,14 @@ form > button {
     }
 
   body {
-    background-color: #333333;
+    background-color: #333333; !important
     color: #fff;
     font-family: brush script mt, cursive;
     font-size: 20px;
   }
+   .container {
+        max-width: 90%;
+    }
+
 }
 
