@@ -1,8 +1,11 @@
+@import url(//db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=BeaufortforLOL-Bold);
+
+@font-face {font-family: "BeaufortforLOL-Bold"; src: url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot"); src: url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff") format("woff"), url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.svg#BeaufortforLOL-Bold") format("svg"); }
 
 body {
     background-color: #333333;
     color: #fff;
-    font-family: brush script mt, cursive;
+    font-family: BeaufortforLOL-Bold;
     font-size: 20px;
 }
 .center {
@@ -78,7 +81,7 @@ form > button {
     padding: 20px;
     font-size: 17px;
     color: #8c9ea3;
-    font-family: brush script mt, cursive;
+    font-family: BeaufortforLOL-Bold;
     font-color: white;
     font-weight: 400;
     border: 2px solid #00837e;
@@ -133,7 +136,7 @@ form > button {
     padding: 10px;
     font-size: 10px;
     color: #8c9ea3;
-    font-family: 'Verdana', sans-serif;
+    font-family: BeaufortforLOL-Bold;
     font-color: white;
     font-weight: 400;
     border: 2px solid #00837e;
@@ -159,7 +162,7 @@ form > button {
   body {
     background-color: #333333; !important
     color: #fff;
-    font-family: 'Verdana', sans-serif;
+    font-family: BeaufortforLOL-Bold;
     font-size: 20px;
   }
    .container {
