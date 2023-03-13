@@ -36,6 +36,7 @@
 </style>
 
 <h2>Leaderboard</h2>
+{% if page_obj %}
 <div style="max-width: 1500px; margin: 0 auto; text-align: center;">
   <table class="leaderboard-table">
     <thead>
@@ -78,4 +79,5 @@
     {% endif %}
   </span>
 </div>
+{% endif %}
 {% endblock %}
