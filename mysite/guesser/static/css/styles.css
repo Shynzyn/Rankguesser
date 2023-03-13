@@ -133,7 +133,7 @@ form > button {
     padding: 10px;
     font-size: 10px;
     color: #8c9ea3;
-    font-family: Helvetica, Sans-Serif;
+    font-family: 'Verdana', sans-serif;
     font-color: white;
     font-weight: 400;
     border: 2px solid #00837e;
@@ -159,7 +159,7 @@ form > button {
   body {
     background-color: #333333; !important
     color: #fff;
-    font-family: Helvetica, Sans-Serif;
+    font-family: 'Verdana', sans-serif;
     font-size: 20px;
   }
    .container {

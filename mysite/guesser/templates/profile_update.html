@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Update Profile{% endblock %}
-{% load crispy_forms_tags %}
 {% block content %}
+<style>
+
+</style>
     <div class="content-section">
         {% if messages %}
         {% for message in messages %}
-        <div  class="alert alert-sucess" role="alert">
+        <div  class="alert alert-success" role="alert">
             {{ message }}
         </div>
         {% endfor %}
@@ -22,8 +24,8 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Profile info</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
+                {{ u_form }}
+                {{ p_form }}
             </fieldset>
             <div class="form-group">
                 <br>
